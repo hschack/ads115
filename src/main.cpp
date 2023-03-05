@@ -14,6 +14,9 @@
 #include<Wire.h>
 #define I2C_ADDRESS 0x48
 
+/***************************   Function Prototypes   *************************/
+float readChannel(ADS1115_MUX channel);
+/******************************************************************************
 /* There are several ways to create your ADS1115_WE object:
  * ADS1115_WE adc = ADS1115_WE()             -> uses Wire / I2C Address = 0x48
  * ADS1115_WE adc = ADS1115_WE(I2C_ADDRESS)  -> uses Wire / I2C_ADDRESS
@@ -123,14 +126,7 @@ void setup() {
   Serial.println("Channel / Voltage [V]: ");
   Serial.println();
 }
-float readChannel(ADS1115_MUX channel) {
-  float voltage = 0.0;
-  adc.setCompareChannels(channel);
-  adc.startSingleMeasurement();
-  while(adc.isBusy()){}
-  voltage = adc.getResult_V(); // alternative: getResult_mV for Millivolt
-  return voltage;
-}
+
 void loop() {
   float voltage = 0.0;
 
@@ -139,4 +135,13 @@ void loop() {
   Serial.print(voltage);
 
   delay(1000);
+}
+
+float readChannel(ADS1115_MUX channel) {
+  float voltage = 0.0;
+  adc.setCompareChannels(channel);
+  adc.startSingleMeasurement();
+  while(adc.isBusy()){}
+  voltage = adc.getResult_V(); // alternative: getResult_mV for Millivolt
+  return voltage;
 }
