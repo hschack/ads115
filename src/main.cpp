@@ -25,7 +25,7 @@ float readChannel(ADS1115_MUX channel);
  * Successfully tested with two I2C busses on an ESP32
  */
 ADS1115_WE adc = ADS1115_WE(I2C_ADDRESS);
-
+// detter er en test
 void setup() {
   Wire.begin();
   Serial.begin(9600);
